@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col h-screen justify-center items-center bg-slate-200">
-    <div class="flex">
-      <h1 class="text-5xl font-bold text-gray-700">Hi, I'm Andrew.</h1>
+    <div class="block sm:flex text-center">
+      <h1 class="text-5xl font-bold text-gray-700">{{time}}, I'm Andrew.</h1>
       <h1 class="text-5xl waving">&nbsp; 👋</h1>
     </div>
     <div class="flex text-4xl mt-4 gap-4">
@@ -17,15 +17,22 @@
 
 <script setup lang="ts">
   import { LanyardData } from '~/types/lanyard'
+
+  const currentHour = new Date().getHours()
+  const time = ref<String>("")
+  if (currentHour < 12) {
+    time.value = "Morning";
+  } else if (currentHour < 18) {
+    time.value = "Afternoon";
+  } else {
+    time.value = "Evening";
+  }
+
   const { $lanyard } = useNuxtApp()
-
-
   const { data: presenceData } = await $lanyard({
     userId: '289894338132180992'
   })
-
   const presence = ref<LanyardData>(presenceData)
-
   const computedStatusClass = computed(() => {
     switch (presence.value.discord_status) {
       case 'online':
