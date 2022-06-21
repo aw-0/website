@@ -2,7 +2,7 @@
   <div class="flex flex-col h-screen justify-center items-center bg-[#CDEEFF]">
     <div class="block sm:flex text-center">
       <h1 class="text-5xl font-bold text-gray-700">{{time}}, I'm Andrew.</h1>
-      <h1 class="text-5xl waving">&nbsp; 👋</h1>
+      <h1 class="hidden sm:block text-5xl waving">&nbsp; 👋</h1>
     </div>
     <div class="flex text-4xl mt-4 gap-4">
       <NuxtLink href="/links/twitter" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-twitter"></i></NuxtLink>
