@@ -24,9 +24,7 @@
     userId: '289894338132180992'
   })
 
-  const presence = ref<LanyardData>({
-    ...presenceData
-  })
+  const presence = ref<LanyardData>(presenceData)
 
   const computedStatusClass = computed(() => {
     switch (presence.value.discord_status) {
@@ -48,9 +46,7 @@
     socket.addEventListener('message', ({ data }) => {
       const { d } = JSON.parse(data)
       if (!d.heartbeat_interval) {
-        presence.value = {
-          ...d
-        }
+        presence.value = d
       }
     })
   })
