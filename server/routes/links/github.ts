@@ -1,0 +1,1 @@
+export default defineEventHandler((event) => sendRedirect(event, "https://github.com/aw-0"))

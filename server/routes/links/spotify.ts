@@ -1,0 +1,1 @@
+export default defineEventHandler((event) => sendRedirect(event, "https://open.spotify.com/user/greenappled"))
