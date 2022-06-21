@@ -10,8 +10,9 @@ export default defineNuxtConfig({
                 { name: 'theme-color', content: '#CDEEFF'},
             ],
             link: [
-                {href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
-                rel: 'stylesheet'},
+                { href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css',
+                rel: 'stylesheet' },
+                { rel: 'icon', type: 'image/x-icon', href: '/static/favicon.ico' }
             ],
         },
     },
