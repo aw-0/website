@@ -4,13 +4,13 @@
       <h1 class="text-5xl font-bold text-gray-700">Hi, I'm Andrew.</h1>
       <h1 class="text-5xl waving">&nbsp; 👋</h1>
     </div>
-    <div class="mt-4 flex">
-      <NuxtLink to="/links/github" target="_blank" class="text-4xl text-gray-700 hover:text-gray-900 ml-4"><i class="fa-brands fa-github"></i></NuxtLink>
-      <a href="mailto:me@andreww.co" class="text-3xl text-gray-700 hover:text-gray-900 ml-4 mt-1"><i class="fa-solid fa-envelope"></i></a>
-      <NuxtLink href="/links/spotify" target="_blank" :class="'text-4xl ml-4 ' + (presence.listening_to_spotify ? 'text-[#1DD760]' : 'text-gray-700 hover:text-gray-900')"><i class="fa-brands fa-spotify"></i></NuxtLink>
-      <NuxtLink href="/links/discord" target="_blank" :class="'text-4xl ml-4 ' + computedStatusClass"><i class="fa-brands fa-discord"></i></NuxtLink>
-      <NuxtLink href="/links/twitter" target="_blank" class="text-4xl text-gray-700 hover:text-gray-900 ml-4"><i class="fa-brands fa-twitter"></i></NuxtLink>
-      <NuxtLink href="/links/linkedin" target="_blank" class="text-4xl text-gray-700 hover:text-gray-900 ml-4"><i class="fa-brands fa-linkedin"></i></NuxtLink>
+    <div class="flex text-4xl mt-4 gap-4">
+      <NuxtLink to="/links/github" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-github"></i></NuxtLink>
+      <a href="mailto:me@andreww.co" class="text-gray-700 hover:text-gray-900"><i class="fa-solid fa-envelope"></i></a>
+      <NuxtLink href="/links/spotify" target="_blank" :class="(presence.listening_to_spotify ? 'text-[#1DD760]' : 'text-gray-700 hover:text-gray-900')"><i class="fa-brands fa-spotify"></i></NuxtLink>
+      <NuxtLink href="/links/discord" target="_blank" :class="computedStatusClass"><i class="fa-brands fa-discord"></i></NuxtLink>
+      <NuxtLink href="/links/twitter" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-twitter"></i></NuxtLink>
+      <NuxtLink href="/links/linkedin" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-linkedin"></i></NuxtLink>
     </div>
   </div>
 </template>
