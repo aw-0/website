@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col h-screen justify-center items-center bg-slate-200">
+  <div class="flex flex-col h-screen justify-center items-center bg-[#CDEEFF]">
     <div class="block sm:flex text-center">
       <h1 class="text-5xl font-bold text-gray-700">{{time}}, I'm Andrew.</h1>
       <h1 class="text-5xl waving">&nbsp; 👋</h1>
