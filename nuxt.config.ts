@@ -14,6 +14,11 @@ export default defineNuxtConfig({
                 rel: 'stylesheet' },
                 { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
             ],
+            script: [
+                {
+                    src: 'https://science.andreww.co/script.js', 'data-site': 'INUIAYEG', defer: true
+                }
+            ]
         },
     },
     buildModules: [
