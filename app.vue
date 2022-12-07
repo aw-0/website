@@ -9,7 +9,6 @@
       <NuxtLink to="/links/github" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-github"></i></NuxtLink>
       <NuxtLink href="/links/discord" target="_blank" :class="computedStatusClass"><i class="fa-brands fa-discord"></i></NuxtLink>
       <NuxtLink href="/links/spotify" target="_blank" :class="(presence.listening_to_spotify ? 'text-[#1DD760]' : 'text-gray-700 hover:text-gray-900')"><i class="fa-brands fa-spotify"></i></NuxtLink>
-      <NuxtLink href="/links/linkedin" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-linkedin"></i></NuxtLink>
       <a href="mailto:me@andreww.co" class="text-gray-700 hover:text-gray-900"><i class="fa-solid fa-envelope"></i></a>
     </div>
   </div>
