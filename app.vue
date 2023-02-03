@@ -1,15 +1,32 @@
 <template>
-  <div class="flex flex-col h-screen justify-center items-center bg-[#CDEEFF]">
-    <div class="block sm:flex text-center">
-      <h1 class="text-5xl font-bold text-gray-700">{{time}}, I'm Andrew.</h1>
-      <h1 class="hidden sm:block text-5xl waving">&nbsp; 👋</h1>
+  <div class="px-4 md:px-16 lg:px-56 xl:px-96 flex flex-col h-screen items-center font-serif bg-gradient-to-b from-white  to-orange-400">
+    <div class="pt-12 text-center">
+      <h1 class="text-5xl font-semibold">{{time}}, i'm andrew.</h1>
+      <div class="mt-1 animate-pulse bg-gradient-to-r from-orange-400 via-purple-400 to-red-400 p-0.5 rounded-full"></div>
     </div>
-    <div class="flex text-4xl mt-4 gap-4">
-      <NuxtLink href="/links/twitter" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-twitter"></i></NuxtLink>
-      <NuxtLink to="/links/github" target="_blank" class="text-gray-700 hover:text-gray-900"><i class="fa-brands fa-github"></i></NuxtLink>
-      <NuxtLink href="/links/discord" target="_blank" :class="computedStatusClass"><i class="fa-brands fa-discord"></i></NuxtLink>
-      <NuxtLink href="/links/spotify" target="_blank" :class="(presence.listening_to_spotify ? 'text-[#1DD760]' : 'text-gray-700 hover:text-gray-900')"><i class="fa-brands fa-spotify"></i></NuxtLink>
-      <a href="mailto:me@andreww.co" class="text-gray-700 hover:text-gray-900"><i class="fa-solid fa-envelope"></i></a>
+    <p class="mt-4 text-xl text-center">i'm a self-taught fullstack engineer from the USA. i build cool things like <a class="italic underline" href="https://koal.us">Koal</a>, <a class="italic underline" href="https://koal.us">anstalla</a>, and <a class="italic underline" href="https://stevenson.space">stevenson.space</a> :)</p>
+    <h3 class="mt-4 text-3xl font-semibold text-center">let's chat:</h3>
+    <ul class="mt-1 ">
+      <li class="text-lg">&bull; <a href="mailto:me@andreww.co" class="italic underline">email</a></li>
+      <li class="text-lg flex">
+        &bull; 
+        <NuxtLink to="/links/discord" target="_blank" class="ml-1 italic underline">
+          discord
+        </NuxtLink>
+        <span v-if="presence.discord_status != 'offline'" class="ml-1 flex">
+          <span :class="`animate-ping absolute inline-flex h-2 w-2 rounded-full opacity-75 ` + computedStatusClass"></span>
+          <span :class="`relative inline-flex rounded-full h-2 w-2 ` + computedStatusClass"></span>
+        </span>
+      </li>
+      <li class="text-lg">&bull; <NuxtLink to="/links/github" target="_blank" class="italic underline">github</NuxtLink></li>
+      <li class="text-lg">&bull; <NuxtLink to="/links/twitter" target="_blank" class="italic underline">twitter</NuxtLink></li>
+    </ul>
+    <div v-if="presence.spotify" class="text-center">
+      <h3 class="mt-4 text-3xl font-semibold">here's what i'm listening to right now:</h3>
+      <div class="p-4">
+        <img class="mx-auto h-32 w-32 rounded-lg border-4 border-orange-300" :src="presence.spotify.album_art_url" />
+          <p class="ml-2 my-auto mt-1 text-lg italic">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -20,11 +37,11 @@
   const currentHour = new Date().getHours()
   const time = ref<String>("")
   if (currentHour < 12) {
-    time.value = "Morning";
+    time.value = "morning";
   } else if (currentHour < 18) {
-    time.value = "Afternoon";
+    time.value = "afternoon";
   } else {
-    time.value = "Evening";
+    time.value = "evening";
   }
 
   const { $lanyard } = useNuxtApp()
@@ -35,12 +52,12 @@
   const computedStatusClass = computed(() => {
     switch (presence.value.discord_status) {
       case 'online':
-        return 'text-green-500 hover:text-green-700'
+        return 'bg-green-500'
       case 'idle':
-        return 'text-yellow-500 hover:text-yellow-700'
+        return 'bg-yellow-500'
       case 'dnd':
-        return 'text-red-500 hover:text-red-700'
-      default: return 'text-gray-700 hover:text-gray-900'
+        return 'bg-red-500'
+      default: return 'bg-gray-700'
     }
   })
 
