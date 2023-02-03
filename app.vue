@@ -4,13 +4,13 @@
       <h1 class="text-5xl font-semibold">{{time}}, i'm andrew.</h1>
       <div class="mt-1 animate-pulse bg-gradient-to-r from-orange-400 via-purple-400 to-red-400 p-0.5 rounded-full"></div>
     </div>
-    <p class="mt-4 text-xl text-center">i'm a self-taught fullstack engineer from the USA. i build cool things like <a class="italic underline" href="https://koal.us" target="_blank">Koal</a> and <a class="italic underline" href="https://anstalla.io" target="_blank">anstalla</a> :)</p>
+    <p class="mt-4 text-xl text-center">i'm a self-taught fullstack engineer from the USA. i build cool things like <a class="italic hover:underline" href="https://koal.us" target="_blank">Koal</a> and <a class="italic hover:underline" href="https://anstalla.io" target="_blank">anstalla</a> :)</p>
     <h3 class="mt-4 text-3xl font-semibold text-center">let's chat:</h3>
     <ul class="mt-1 ">
-      <li class="text-lg">&bull; <a href="mailto:me@andreww.co" class="italic underline">email</a></li>
+      <li class="text-lg">&bull; <a href="mailto:me@andreww.co" class="italic hover:underline">email</a></li>
       <li class="text-lg flex">
         &bull; 
-        <NuxtLink to="/links/discord" target="_blank" class="ml-1 italic underline">
+        <NuxtLink to="/links/discord" target="_blank" class="ml-1 italic hover:underline">
           discord
         </NuxtLink>
         <span v-if="presence.discord_status != 'offline'" class="ml-1 flex">
@@ -18,14 +18,14 @@
           <span :class="`relative inline-flex rounded-full h-2 w-2 ` + computedStatusClass"></span>
         </span>
       </li>
-      <li class="text-lg">&bull; <NuxtLink to="/links/github" target="_blank" class="italic underline">github</NuxtLink></li>
-      <li class="text-lg">&bull; <NuxtLink to="/links/twitter" target="_blank" class="italic underline">twitter</NuxtLink></li>
+      <li class="text-lg">&bull; <NuxtLink to="/links/github" target="_blank" class="italic hover:underline">github</NuxtLink></li>
+      <li class="text-lg">&bull; <NuxtLink to="/links/twitter" target="_blank" class="italic hover:underline">twitter</NuxtLink></li>
     </ul>
     <div v-if="presence.spotify" class="text-center">
       <h3 class="mt-4 text-3xl font-semibold">here's what i'm listening to right now:</h3>
       <div class="p-4">
-        <img class="mx-auto h-32 w-32 rounded-lg border-4 border-orange-400 border-opacity-75" :src="presence.spotify.album_art_url" />
-        <p class="mt-2 text-center text-xl italic">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist }}</p>
+        <img class="mx-auto mb-2 h-32 w-32 rounded-lg border-4 border-orange-400 border-opacity-75" :src="presence.spotify.album_art_url" />
+        <a :href="`https://open.spotify.com/track/${presence.spotify.track_id}`" target="_blank" class="text-center hover:underline text-xl italic">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist }}</a>
       </div>
     </div>
   </div>
