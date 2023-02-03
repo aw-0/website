@@ -35,7 +35,7 @@
   import { LanyardData } from '~/types/lanyard'
 
   const currentHour = new Date().getHours()
-  const time = ref<String>("")
+  const time = ref<String>("hiya")
   if (currentHour < 12) {
     time.value = "morning";
   } else if (currentHour < 18) {
