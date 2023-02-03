@@ -6,7 +6,8 @@ export default defineNuxtConfig({
               { name: 'og:title', content: 'andreww.co'},
               { name: 'theme-color', content: '#FFFCFA'},
               { name: 'og:image', content: '/bg.png' },
-              { name: 'twitter:image', content: '/bg.png' }
+              { name: 'twitter:image', content: '/bg.png' },
+              { name: 'twitter:card', content: 'summary_large_image' }
           ],
           link: [
               { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
