@@ -25,7 +25,7 @@
       <h3 class="mt-4 text-3xl font-semibold">here's what i'm listening to right now:</h3>
       <div class="p-4">
         <img class="mx-auto h-32 w-32 rounded-lg border-4 border-orange-300" :src="presence.spotify.album_art_url" />
-          <p class="ml-2 my-auto mt-1 text-lg italic">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist }}</p>
+        <p class="mt-2 text-center text-xl italic">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist }}</p>
       </div>
     </div>
   </div>
