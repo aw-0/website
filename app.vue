@@ -32,7 +32,8 @@
 </template>
 
 <script setup lang="ts">
-  import { LanyardData } from '~/types/lanyard'
+  import type { LanyardData } from '@/types/lanyard'
+  import { ref, onMounted, computed } from 'vue'
 
   const currentHour = new Date().getHours()
   const time = ref<String>("hiya")

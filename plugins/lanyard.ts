@@ -2,7 +2,7 @@
 
 /* eslint-disable no-redeclare, brace-style */
 // eslint doesn't seem to understand function overloading!
-import { LanyardResponse } from '~/types/lanyard'
+import type { LanyardResponse } from '@/types/lanyard'
 
 const enum Constants {
     apiBase = 'https://api.lanyard.rest/v1',

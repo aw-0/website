@@ -14,7 +14,7 @@ export default defineNuxtConfig({
             ],
             script: [
                 {
-                    src: 'https://science.andreww.co/script.js', 'data-site': 'INUIAYEG', defer: true
+                    src: 'https://science.wolfsoftworks.com/js/script.js', 'data-domain': 'andreww.co', defer: true
                 }
             ]
         },
