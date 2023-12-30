@@ -19,6 +19,7 @@
         </span>
       </li>
       <li class="text-lg">&bull; <NuxtLink to="/links/github" target="_blank" class="italic hover:underline">github</NuxtLink></li>
+      <li class="text-lg">&bull; <NuxtLink to="/links/linkedin" target="_blank" class="italic hover:underline">linkedin</NuxtLink></li>
       <li class="text-lg">&bull; <NuxtLink to="/links/twitter" target="_blank" class="italic hover:underline">twitter</NuxtLink></li>
     </ul>
     <div v-if="presence.spotify" class="text-center">
