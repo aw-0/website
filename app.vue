@@ -35,18 +35,26 @@
 <script setup lang="ts">
   import type { LanyardData } from '@/types/lanyard'
   import { ref, onMounted, computed } from 'vue'
+  const time = ref<String>("hiya")
 
-  const { data: time } = await useAsyncData(async () => {
-    const currentHour = new Date().getHours()
-    const time = ref<String>("hiya")
+  const getTime = () => {
+    const currentHour = new Date().getHours();
     if (currentHour < 12) {
-      return "morning";
+      time.value = "morning";
     } else if (currentHour < 18) {
-      return "afternoon";
+      time.value = "afternoon";
     } else {
-      return "evening";
+      time.value = "evening";
     }
-  })
+  };
+
+  onMounted(() => {
+    getTime();
+  });
+
+  onServerPrefetch(() => {
+    getTime();
+  });
 
   const { $lanyard } = useNuxtApp()
   const { data: presenceData } = await $lanyard({
