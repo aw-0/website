@@ -52,10 +52,6 @@
     getTime();
   });
 
-  onServerPrefetch(() => {
-    getTime();
-  });
-
   const { $lanyard } = useNuxtApp()
   const { data: presenceData } = await $lanyard({
     userId: '289894338132180992'
