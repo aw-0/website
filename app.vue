@@ -1,7 +1,7 @@
 <template>
   <div class="px-4 md:px-16 lg:px-56 xl:px-96 flex flex-col h-screen items-center font-serif bg-gradient-to-b from-white  to-orange-400">
     <div class="pt-12 text-center">
-      <h1 class="text-5xl font-semibold">{{time}}, i'm andrew.</h1>
+      <h1 class="text-5xl font-semibold">{{ time }}, i'm andrew.</h1>
       <div class="mt-1 animate-pulse bg-gradient-to-r from-orange-400 via-purple-400 to-red-400 p-0.5 rounded-full"></div>
     </div>
     <p class="mt-4 text-xl text-center">i'm a self-taught fullstack engineer from the USA. i build cool things like <a class="italic hover:underline" href="https://koal.us" target="_blank">Koal</a> and <a class="italic hover:underline" href="https://stevenson.space" target="_blank">stevenson.space</a> :)</p>
@@ -36,15 +36,17 @@
   import type { LanyardData } from '@/types/lanyard'
   import { ref, onMounted, computed } from 'vue'
 
-  const currentHour = new Date().getHours()
-  const time = ref<String>("hiya")
-  if (currentHour < 12) {
-    time.value = "morning";
-  } else if (currentHour < 18) {
-    time.value = "afternoon";
-  } else {
-    time.value = "evening";
-  }
+  const { data: time } = await useAsyncData(async () => {
+    const currentHour = new Date().getHours()
+    const time = ref<String>("hiya")
+    if (currentHour < 12) {
+      return "morning";
+    } else if (currentHour < 18) {
+      return "afternoon";
+    } else {
+      return "evening";
+    }
+  })
 
   const { $lanyard } = useNuxtApp()
   const { data: presenceData } = await $lanyard({

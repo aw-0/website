@@ -1,4 +1,6 @@
 export default defineNuxtConfig({
+
+    ssr: true,
     app: {
         head: {
             title: 'andreww.co',
