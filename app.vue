@@ -1,10 +1,54 @@
 <template>
-  <div class="px-4 md:px-16 lg:px-56 xl:px-96 flex flex-col h-screen items-center font-serif bg-gradient-to-b from-white  to-orange-400">
-    <div class="pt-12 text-center">
-      <h1 class="text-5xl font-semibold">{{ time }}, i'm andrew.</h1>
-      <div class="mt-1 animate-pulse bg-gradient-to-r from-orange-400 via-purple-400 to-red-400 p-0.5 rounded-full"></div>
+  <div class="px-8 md:px-16 xl:px-96 h-screen font-serif bg-orange-50">
+    <div class="pt-12 flex flex-col items-center">
+      <div class="flex gap-8">
+        <img class="ml-2 h-48 w-48 rounded-full border-4 border-amber-400 border-opacity-75" src="/me.jpg" />
+        <h1 class="text-5xl font-semibold my-auto">👋 heya, i'm andrew.</h1>
+      </div>
     </div>
-    <p class="mt-4 text-xl text-center">i'm a self-taught fullstack engineer from the USA. i build cool things like <a class="italic hover:underline" href="https://koal.us" target="_blank">Koal</a> and <a class="italic hover:underline" href="https://stevenson.space" target="_blank">stevenson.space</a> :)</p>
+    <div class="grid md:grid-cols-2 mt-10 gap-4 h-fit">
+      <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4">
+        <p class="text-2xl">i'm a self-taught fullstack engineer from the Windy City. i tinker with cool things like <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://stevenson.space" target="_blank">stevenson.space</a> and <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://shsmaps.com" target="_blank">SHSMaps</a>, and build out features in <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://digitalconcierge.io" target="_blank">DigitalConcierge</a>.</p>
+        <p class="mt-4 text-2xl">recently, i've spent the past 6 months organizing <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://windycityhacks.com" target="_blank">Windy City Hacks</a>, one of the only 2024 hackathons in the Chicagoland area. we raised over $4k with over 100 students registered to build something amazing over 24 hours. we offered three meals & dessert, various swag, and prizes for eighteen attendees :)</p>
+      </div>
+      <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 flex flex-col">
+        <p class="text-3xl">my <i class="mr-1.5">very</i> recent work:</p>
+        <ul class="ml-6 mt-4 text-2xl marker:text-amber-500 flex flex-col items-center">
+          <li>
+            <a href="/links/koal" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-2">
+              <img class="h-10 w-10 rounded-md border-2 border-amber-500" src="https://avatars.githubusercontent.com/u/48663984?" /> <p class="my-auto ml-2">windycityhacks/site: fix times for tmrw</p>
+            </a>
+          </li>
+          <li>
+            <a href="/links/koal" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-2">
+              <img class="h-10 w-10 rounded-md border-2 border-amber-500" src="https://avatars.githubusercontent.com/u/48663984?" /> <p class="my-auto ml-2">windycityhacks/site: fix times for tmrw</p>
+            </a>
+          </li>
+          <li>
+            <a href="/links/koal" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-2">
+              <img class="h-10 w-10 rounded-md border-2 border-amber-500" src="https://avatars.githubusercontent.com/u/48663984?" /> <p class="my-auto ml-2">windycityhacks/site: fix times for tmrw</p>
+            </a>
+          </li>
+          <li>
+            <a href="/links/koal" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-2">
+              <img class="h-10 w-10 rounded-md border-2 border-amber-500" src="https://avatars.githubusercontent.com/u/48663984?" /> <p class="my-auto ml-2">windycityhacks/site: fix times for tmrw</p>
+            </a>
+          </li>
+          <li>
+            <a href="/links/koal" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-4">
+              <img class="h-10 w-10 rounded-md border-2 border-amber-500" src="https://avatars.githubusercontent.com/u/48663984?" /> <p class="my-auto ml-2">windycityhacks/site: fix times for tmrw</p>
+            </a>
+          </li>
+        </ul>
+        <p class="text-lg mt-auto">commits from <NuxtLink to="/links/github" target="_blank" class="italic hover:underline decoration-wavy decoration-amber-500">my github</NuxtLink></p>
+      </div>
+      <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 flex flex-col">
+        <p class="text-3xl">my top songs this month:</p>
+        <div class="grid grid-cols-2 grid-rows-2 gap-4 mt-4">
+          
+        </div>
+      </div>
+    </div>
     <h3 class="mt-4 text-3xl font-semibold text-center">let's chat:</h3>
     <ul class="mt-1 ">
       <li class="text-lg">&bull; <a href="mailto:me@andreww.co" class="italic hover:underline">email</a></li>
@@ -35,22 +79,6 @@
 <script setup lang="ts">
   import type { LanyardData } from '@/types/lanyard'
   import { ref, onMounted, computed } from 'vue'
-  const time = ref<String>("hiya")
-
-  const getTime = () => {
-    const currentHour = new Date().getHours();
-    if (currentHour < 12) {
-      time.value = "morning";
-    } else if (currentHour < 18) {
-      time.value = "afternoon";
-    } else {
-      time.value = "evening";
-    }
-  };
-
-  onMounted(() => {
-    getTime();
-  });
 
   const { $lanyard } = useNuxtApp()
   const { data: presenceData } = await $lanyard({
