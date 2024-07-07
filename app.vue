@@ -1,5 +1,5 @@
 <template>
-  <div class="px-8 lg:px-24 xl:px-34 2xl:px-48 h-screen font-serif bg-orange-50">
+  <div class="px-8 lg:px-24 xl:px-34 2xl:px-48 min-[2000px]:px-[500px] min-[2500px]:px-[800px] h-full md:h-screen font-serif bg-orange-50">
     <div class="pt-12 flex flex-col items-center">
       <div class="md:flex gap-8">
         <div class="flex flex-col items-center">
@@ -7,7 +7,7 @@
         </div>
         <div class="mt-4 md:my-auto">
           <h1 class="text-5xl font-semibold my-auto">👋 heya, i'm andrew.</h1>
-          <p v-if="presence.spotify" class="text-xl text-center">i'm listening to <a :href="`https://open.spotify.com/track/${presence.spotify.track_id}`" target="_blank" class="italic hover:underline">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist.split(';')[0] }}</a> right now <span class="animate-pulse">🎧</span></p>
+          <p v-if="presence.spotify" class="text-xl text-center">i'm listening to <a :href="`https://open.spotify.com/track/${presence.spotify.track_id}`" target="_blank" class="italic hover:underline decoration-wavy decoration-amber-500">{{ presence.spotify.song }} &bull; {{ presence.spotify.artist.split(';')[0] }}</a> right now <span class="animate-pulse">🎧</span></p>
         </div>
       </div>
     </div>
@@ -55,9 +55,13 @@
       </div>
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 flex flex-col mb-12 md:mb-0">
         <p class="text-3xl">my top songs this month:</p>
-        <div class="grid grid-cols-2 grid-rows-2 gap-6 mt-6">
+        <div class="grid grid-cols-2 grid-rows-2 gap-4 mt-6">
+          <div v-if="topSongs.length == 0" v-for="index in 4" :key="index" class="flex flex-col items-center gap-4 mb-4">
+            <div class="h-24 w-24 rounded-md bg-orange-200 animate-pulse"></div>
+            <div class="mt-1 p-3 bg-orange-200 animate-pulse rounded-md w-2/3"></div>
+          </div>
           <div v-for="song in topSongs" :key="song.artist.name" class="flex flex-col items-center">
-            <img class="h-24 w-24 rounded-md border-2 border-amber-500" :src="song.image[2]['#text']" />
+            <img class="h-24 w-24 rounded-md border-2 border-amber-500" :src="song.albumPic" />
             <p class="mt-2 text-xl">{{ song.name }} &bull; {{ song.artist.name }}</p>
           </div>
         </div>
@@ -100,10 +104,12 @@
         presence.value = d
       }
     })
-    
+
     // fetch latest commits
     const commits = await fetch('https://api.github.com/users/aw-0/events/public')
     const commitsData = await commits.json()
+
+    // get last 4 unique commits in different repos
     let i = 0
     for (const commit of commitsData) {
       if (commit.type == 'PushEvent' && commit.payload.commits.length > 0) {
