@@ -19,10 +19,6 @@ export default defineNuxtConfig({
         },
     },
 
-    routeRules: {
-        '/api/getTopSongs': { isr: 172800 }
-    },
-
     nitro: {
         preset: 'vercel'
     },
