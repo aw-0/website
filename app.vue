@@ -106,7 +106,7 @@
     })
 
     // fetch latest commits
-    const commits = await fetch('https://api.github.com/users/aw-0/events/public')
+    const commits = await fetch('https://api.github.com/users/aw-0/events/public?per_page=50')
     const commitsData = await commits.json()
 
     // get last 4 unique commits in different repos
