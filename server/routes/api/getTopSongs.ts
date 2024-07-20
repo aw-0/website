@@ -1,7 +1,7 @@
 export default defineEventHandler(async (event) => {
     // my quest to do everything without the spotify api
     const totalSongs = []
-    const songQuery = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=1month&user=andrewwolf_&api_key=${process.env.LASTFM_KEY}&format=json`)
+    const songQuery = await fetch(`https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=3month&user=andrewwolf_&api_key=${process.env.LASTFM_KEY}&format=json`)
     const songData = await songQuery.json()
     for (let i = 0; i < 4; i++) {
         totalSongs.push(songData.toptracks.track[i])
