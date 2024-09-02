@@ -1,1 +1,1 @@
-export default defineEventHandler((event) => sendRedirect(event, "https://twitter.com/andreww_0"))
+export default defineEventHandler((event) => sendRedirect(event, "https://twitter.com/andwolf_"))
