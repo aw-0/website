@@ -13,7 +13,12 @@
     </div>
     <div class="grid md:grid-cols-2 mt-10 gap-4 h-fit">
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 text-2xl xl:text-3xl">
-        <p class="">i'm a self-taught fullstack engineer from the Windy City. i tinker with cool things like <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://stevenson.space" target="_blank">stevenson.space</a> and build out features in <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://digitalconcierge.io" target="_blank">DigitalConcierge</a>.</p>
+        <p class="">
+          i'm a self-taught fullstack engineer from the Windy City. i help creators get paid at 
+          <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://hydrantpay.com" target="_blank">Hydrant</a>
+          and tinker with cool things like 
+            <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://stevenson.space" target="_blank">stevenson.space</a> 
+          .</p>
         <p class="mt-4">recently, i've spent the past 6 months organizing <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://windycityhacks.com" target="_blank">Windy City Hacks</a>, one of the only 2024 hackathons in the Chicagoland area. we raised over $4k with over 100 students registered to build something amazing over 24 hours. we offered three meals & dessert, various swag, and prizes for eighteen attendees :)</p>
       </div>
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4">
@@ -114,6 +119,9 @@
     for (const commit of commitsData) {
       if (commit.type == 'PushEvent' && commit.payload.commits.length > 0) {
         const commitRepo = commit.repo.name
+        console.log(commitRepo)
+        console.log(latestCommits.value.length == 0 || commitRepo != latestCommits.value[latestCommits.value.length - 1].repo.name)
+
         if (latestCommits.value.length == 0 || commitRepo != latestCommits.value[latestCommits.value.length - 1].repo.name) {
           latestCommits.value.push(commit)
           i++
