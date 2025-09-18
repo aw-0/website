@@ -14,12 +14,10 @@
     <div class="grid md:grid-cols-2 mt-10 gap-4 h-fit">
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 text-2xl xl:text-3xl">
         <p class="">
-          i'm a self-taught fullstack engineer from the Windy City. i help creators get paid at 
-          <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://hydrantpay.com" target="_blank">Hydrant</a>
-          and tinker with cool things like 
-            <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://stevenson.space" target="_blank">stevenson.space</a> 
-          .</p>
-        <p class="mt-4">recently, i've spent the past 6 months organizing <a class="italic hover:underline decoration-wavy decoration-amber-500" href="https://windycityhacks.com" target="_blank">Windy City Hacks</a>, one of the only 2024 hackathons in the Chicagoland area. we raised over $4k with over 100 students registered to build something amazing over 24 hours. we offered three meals & dessert, various swag, and prizes for eighteen attendees :)</p>
+           hi, i'm andrew, a computer engineering student at uw-madison with solid full‑stack web development experience. 
+          <br/><br/>
+           i've led development on a revenue‑generating saas for roblox communities, built creator‑payment tools, and organized a 24‑hour chicago hackathon for 70 peers. comfortable with typescript/react, flutter, and cloud infrastructure on GCP &amp; AWS, i focus on translating ideas into dependable, production‑grade software.
+        </p>
       </div>
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4">
         <h3 class="text-3xl">let's chat:</h3>
@@ -43,7 +41,7 @@
       </div>
       <div class="bg-orange-100 border-2 border-amber-200 rounded-lg p-4 flex flex-col">
         <p class="text-3xl">my <i class="mr-1">very</i> recent work:</p>
-        <div class="my-auto">
+        <div :class="latestCommits.length === 1 ? '' : 'my-auto'">
         <ul class="mt-4 text-xl marker:text-amber-500 font-mono">
           <li v-if="latestCommits.length == 0" v-for="index in 4" :key="index" class="flex gap-4 mb-4">
             <div class="p-6 bg-orange-200 animate-pulse rounded-md"></div>
@@ -51,7 +49,7 @@
           </li>
           <li v-for="commit in latestCommits" :key="commit.id">
             <a :href="`https://github.com/${commit.repo.name}/commit/${commit.payload.commits[0].sha}`" target="_blank" class="flex italic hover:underline decoration-wavy decoration-amber-500 mb-4">
-              <img class="h-12 w-12 rounded-md border-2 border-amber-500" :src="'org' in commit ? commit.org.avatar_url : commit.actor.avatar_url" /> <p class="my-auto ml-3">{{ commit.repo.name }}: {{ commit.payload.commits[0].message }}</p>
+              <img class="h-12 w-12 rounded-md border-2 border-amber-500" :src="commit.org?.avatar_url ?? commit.actor.avatar_url" /> <p class="my-auto ml-3">{{ commit.repo.name }}: {{ commit.payload.commits[0].message }}</p>
             </a>
           </li>
         </ul>
@@ -78,14 +76,28 @@
 <script setup lang="ts">
   import type { LanyardData } from '@/types/lanyard'
   import { ref, onMounted, computed } from 'vue'
+  
+  type GithubPushCommitEvent = {
+    id: string
+    repo: { name: string }
+    payload: { commits: { sha: string; message: string }[] }
+    actor: { avatar_url: string }
+    org?: { avatar_url: string }
+  }
+
+  type TopSong = {
+    name: string
+    artist: { name: string }
+    albumPic: string
+  }
 
   const { $lanyard } = useNuxtApp()
   const { data: presenceData } = await $lanyard({
     userId: '289894338132180992'
   })
   const presence = ref<LanyardData>(presenceData)
-  const latestCommits = ref([]);
-  const topSongs = ref([]);
+  const latestCommits = ref<GithubPushCommitEvent[]>([]);
+  const topSongs = ref<TopSong[]>([]);
   const computedStatusClass = computed(() => {
     switch (presence.value.discord_status) {
       case 'online':
@@ -111,30 +123,20 @@
     })
 
     // fetch latest commits
-    const commits = await fetch('https://api.github.com/users/aw-0/events/public?per_page=50')
-    const commitsData = await commits.json()
+    const commits = await fetch('https://api.github.com/users/aw-0/events/public?per_page=500')
+    const commitsData: any[] = await commits.json()
 
-    // get last 4 unique commits in different repos
-    let i = 0
-    for (const commit of commitsData) {
-      if (commit.type == 'PushEvent' && commit.payload.commits.length > 0) {
-        const commitRepo = commit.repo.name
-        console.log(commitRepo)
-        console.log(latestCommits.value.length == 0 || commitRepo != latestCommits.value[latestCommits.value.length - 1].repo.name)
-
-        if (latestCommits.value.length == 0 || commitRepo != latestCommits.value[latestCommits.value.length - 1].repo.name) {
-          latestCommits.value.push(commit)
-          i++
-          if (i == 4) {
-            break
-          }
-        }
+    // get last 4 push events (regardless of repo)
+    for (const event of commitsData) {
+      if (event.type === 'PushEvent' && event.payload.commits.length > 0) {
+        latestCommits.value.push(event as GithubPushCommitEvent)
+        if (latestCommits.value.length === 4) break
       }
     }
 
     // fetch top songs
     const apiTopSongs = await fetch('/api/getTopSongs')
-    apiTopSongs.json().then(data => {
+    apiTopSongs.json().then((data: { songs: TopSong[] }) => {
       topSongs.value = data.songs
     })
   })
