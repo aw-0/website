@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg-deep: #0a0a0a;
+  --bg-surface: #141414;
+  --halftone-cream: #f2ece4;
+  --film-amber: #e8a87c;
+  --light-leak: #ff6b35;
+  --light-leak-red: #c94043;
+  --text-primary: #ebe6df;
+  --text-muted: #8a8578;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  background-color: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+body {
+  font-family: var(--font-ibm-plex-mono);
+}
+
+@layer utilities {
+  .film-grain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    background-size: 200px 200px;
+    animation: grain 8s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes grain {
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    25% {
+      transform: translate(-2%, -2%);
+    }
+    50% {
+      transform: translate(2%, 2%);
+    }
+    75% {
+      transform: translate(-1%, 1%);
+    }
+  }
+
+  .light-leak-hover {
+    transition: box-shadow 0.4s ease;
+    position: relative;
+  }
+
+  .light-leak-hover:hover {
+    box-shadow: 
+      inset 25px -10px 50px -10px rgba(242, 236, 228, 0.25),
+      inset -35px 15px 45px -12px rgba(232, 168, 124, 0.3),
+      inset 15px 25px 35px -15px rgba(242, 236, 228, 0.2),
+      inset -20px -25px 40px -18px rgba(232, 168, 124, 0.2),
+      inset 0 -15px 30px -10px rgba(242, 236, 228, 0.15);
+  }
+
+  .film-vignette {
+    position: relative;
+  }
+
+  .film-vignette::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(10, 10, 10, 0.3) 100%);
+    z-index: 1;
+  }
+
+  .glass-card {
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(242, 236, 228, 0.1);
+  }
+}

@@ -1,1 +1,0 @@
-export default defineEventHandler((event) => sendRedirect(event, "https://calendar.app.google/xaV1rgofBQWvaZqP7"))

@@ -1,1 +1,0 @@
-export default defineEventHandler((event) => sendRedirect(event, "https://discord.com/channels/@me/289894338132180992"))
