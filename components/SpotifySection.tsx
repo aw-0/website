@@ -15,21 +15,37 @@ export default function SpotifySection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    const controller = new AbortController()
+    let isMounted = true
+
     const fetchSongs = async () => {
       try {
-        const response = await fetch('/api/top-songs')
+        const response = await fetch('/api/top-songs', { signal: controller.signal })
+        if (!response.ok) {
+          console.warn('Top songs request failed:', response.status)
+          return
+        }
+
         const data = await response.json()
-        if (data.songs) {
+        if (data.songs && isMounted) {
           setSongs(data.songs)
         }
       } catch (error) {
-        console.error('Failed to fetch top songs:', error)
+        if ((error as Error).name !== 'AbortError') {
+          console.error('Failed to fetch top songs:', error)
+        }
       } finally {
-        setLoading(false)
+        if (isMounted) {
+          setLoading(false)
+        }
       }
     }
 
     fetchSongs()
+    return () => {
+      isMounted = false
+      controller.abort()
+    }
   }, [])
 
   return (
@@ -58,17 +74,17 @@ export default function SpotifySection() {
           ) : (
             songs.map((song, index) => (
               <motion.div
-                key={`${song.name}-${index}`}
+                key={`${song.name}-${song.artist.name}-${index}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.4 + index * 0.05, duration: 0.3 }}
                 className="flex flex-col group"
               >
                 <div className="relative w-full aspect-square max-w-[140px] rounded-lg overflow-hidden film-vignette mb-2">
-                  <Image
+                  <img
                     src={song.albumPic}
                     alt={`${song.name} by ${song.artist.name}`}
-                    fill
+                    sizes="(min-width: 768px) 140px, 50vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-110"
                     style={{
                       filter: 'brightness(1.1) saturate(1.2) contrast(1.05)',

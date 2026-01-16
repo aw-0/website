@@ -20,8 +20,12 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: 'andreww.co',
   description: "Andrew's personal website",
+  metadataBase: new URL('https://andreww.co'),
   openGraph: {
     title: 'andreww.co',
+    description: "Andrew's personal website",
+    url: 'https://andreww.co',
+    type: 'website',
   },
 }
 
@@ -34,8 +38,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${bricolage.variable} ${ibmPlexMono.variable}`}>
       <head>
         <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://science.andreww.co" />
       </head>
-      <body>
+      <body className="antialiased">
         <Script
           src="https://science.andreww.co/script.js"
           data-site="INUIAYEG"

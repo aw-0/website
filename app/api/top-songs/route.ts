@@ -16,7 +16,8 @@ export async function GET() {
 
     // Fetch top tracks from Last.fm
     const songQuery = await fetch(
-      `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=1month&user=andrewwolf_&api_key=${lastFmKey}&limit=6&format=json`
+      `https://ws.audioscrobbler.com/2.0/?method=user.gettoptracks&period=1month&user=andrewwolf_&api_key=${lastFmKey}&limit=6&format=json`,
+      { next: { revalidate: 172800 } }
     )
 
     if (!songQuery.ok) {
@@ -43,8 +44,14 @@ export async function GET() {
       tracks.map(async (song: any) => {
         try {
           const pictureSearch = await fetch(
-            `https://api.deezer.com/search?q=${encodeURIComponent(song.name)}+${encodeURIComponent(song.artist.name)}`
+            `https://api.deezer.com/search?q=${encodeURIComponent(song.name)}+${encodeURIComponent(song.artist.name)}`,
+            { next: { revalidate: 172800 } }
           )
+
+          if (!pictureSearch.ok) {
+            throw new Error(`Deezer API error: ${pictureSearch.status}`)
+          }
+
           const deezerData = await pictureSearch.json()
 
           return {
@@ -65,17 +72,7 @@ export async function GET() {
       })
     )
 
-    console.log(totalSongsWithAlbums)
-
-    return NextResponse.json(
-      { songs: totalSongsWithAlbums },
-      {
-        status: 200,
-        headers: {
-          'Cache-Control': 'public, max-age=172800',
-        },
-      }
-    )
+    return NextResponse.json({ songs: totalSongsWithAlbums })
   } catch (error) {
     console.error('Error fetching top songs:', error)
     return NextResponse.json({ songs: [], error: 'Failed to fetch top songs' }, { status: 500 })

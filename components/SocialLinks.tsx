@@ -16,7 +16,7 @@ const links = [
 
 export default function SocialLinks() {
   return (
-    <ul className="flex flex-wrap items-center gap-x-3 gap-y-2">
+    <ul className="flex flex-wrap items-center gap-x-3 gap-y-2" aria-label="Social links">
       {links.map((link, index) => (
         <motion.li
           key={link.name}
@@ -31,7 +31,7 @@ export default function SocialLinks() {
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
             className="flex items-center text-sm md:text-base font-mono text-primary group"
           >
-            <span className="group-hover:underline decoration-wavy hover:text-film-amber transition-colors">{link.name}</span>
+            <span className="group-hover:underline decoration-wavy hover:text-film-amber transition-colors font-semibold">{link.name}</span>
           </Link>
           {index < links.length - 1 && <span className="text-muted mx-2">·</span>}
         </motion.li>
