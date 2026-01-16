@@ -16,7 +16,7 @@ const links = [
 
 export default function SocialLinks() {
   return (
-    <ul className="flex flex-wrap items-center gap-x-3 gap-y-2" aria-label="Social links">
+    <ul className="flex flex-wrap items-center gap-y-2" aria-label="Social links">
       {links.map((link, index) => (
         <motion.li
           key={link.name}
@@ -29,7 +29,7 @@ export default function SocialLinks() {
             href={link.href}
             target={link.href.startsWith('http') ? '_blank' : undefined}
             rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
-            className="flex items-center text-sm md:text-base font-mono text-primary group"
+            className="flex items-center text-sm md:text-base font-mono text-primary"
           >
             <span className="group-hover:underline decoration-wavy hover:text-film-amber transition-colors font-semibold">{link.name}</span>
           </Link>

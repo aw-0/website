@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic'
 import SpotifySection from '@/components/SpotifySection'
 import SocialLinks from '@/components/SocialLinks'
+import ProjectsSection from '@/components/ProjectsSection'
 
 const HalftoneBackground = dynamic(() => import('@/components/HalftoneBackground'), {
   ssr: false,
@@ -54,7 +55,20 @@ export default function Home() {
             </MotionParagraph>
           </MotionDiv>
 
+          <ProjectsSection />
+
           <SpotifySection />
+
+          <MotionDiv
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="glass-card rounded-2xl px-6 py-4 md:px-8 md:py-5 mt-10"
+          >
+            <p className="text-xs md:text-sm font-mono text-primary/50">
+              ps. the background is a film photo i shot and ran through a custom Paper shader!
+            </p>
+          </MotionDiv>
         </div>
       </main>
     </>
