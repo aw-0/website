@@ -8,7 +8,7 @@ const links = [
   { name: 'twitter', href: 'https://twitter.com/andwolf_' },
   {
     name: 'linkedin',
-    href: 'https://www.linkedin.com/in/andrew-wolf-a5a746234/',
+    href: 'https://www.linkedin.com/in/wolfandrew00/',
   },
   { name: 'github', href: 'https://github.com/aw-0' },
   { name: 'resume', href: '/resume.pdf' },

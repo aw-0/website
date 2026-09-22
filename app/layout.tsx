@@ -18,12 +18,12 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'andreww.co',
-  description: "Andrew's personal website",
+  title: 'Andrew Wolf | Computer Engineering & Software',
+  description: 'Computer engineering student at UW-Madison building web applications, embedded video systems, and makerspace automation.',
   metadataBase: new URL('https://andreww.co'),
   openGraph: {
-    title: 'andreww.co',
-    description: "Andrew's personal website",
+    title: 'Andrew Wolf | Computer Engineering & Software',
+    description: 'Computer engineering student at UW-Madison building web applications, embedded video systems, and makerspace automation.',
     url: 'https://andreww.co',
     type: 'website',
   },

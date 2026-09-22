@@ -4,17 +4,60 @@ import { motion } from 'framer-motion'
 
 type Project = {
   title: string
+  role?: string
   dateRange: string
   techStack?: string
   description: string
   link?: string
 }
 
+const experience: Project[] = [
+  {
+    title: 'Grainger Engineering Design Innovation Lab',
+    role: 'Technical Employee',
+    dateRange: 'Sep 2025 – Present',
+    techStack: '3D printing, rapid prototyping, electronics',
+    description:
+      'Support student, faculty, and research projects in a 25k+ sq ft makerspace. I maintain software for job intake, queue optimization, and status monitoring across 45+ 3D printers, and help with equipment training, shop operations, and safety.',
+  },
+  {
+    title: 'AV',
+    role: 'Software Engineering Intern',
+    dateRange: 'Jun 2026 – Aug 2026',
+    techStack: 'Rust, Python, GStreamer, FFmpeg, OpenCV, embedded Linux',
+    description:
+      'Built a 16-bit infrared video recording pipeline in Rust, with custom processing plugins for capture, encoding, compression, and per-frame timestamps. I also developed camera latency measurement tools and a synchronized EO/LWIR video overlay tool that doubled data annotation efficiency.',
+  },
+  {
+    title: 'OktoRocket',
+    role: 'Software Engineering Intern · Part-time',
+    dateRange: 'Apr 2022 – Aug 2025',
+    techStack: 'React, platform reliability',
+    description:
+      'Refactored a legacy React app used by thousands of clients and improved core features as the platform scaled from roughly 50 to 1,000+ locations. Reliability improvements supported 2M+ texts and 30k+ hours of audio transcription each month.',
+  },
+  {
+    title: 'Hydrant Pay',
+    role: 'Founding Software Engineer',
+    dateRange: 'Jul 2024 – Jul 2025',
+    techStack: 'Payment workflows, financial integrations, user interfaces',
+    description:
+      'Built interfaces for influencer talent agencies to manage invoices and contract payment splits. I designed backend integrations for early invoice payments, helping the platform process $500k+ in billing for 50+ clients within its first months.',
+  },
+  {
+    title: 'Tamarak Day Camp',
+    role: 'Lead Summer Camp Counselor · Seasonal',
+    dateRange: 'Jun 2022 – Jul 2025',
+    description:
+      'Led groups of 15+ six-year-old campers and mentored 20+ junior counselors in leadership and conflict resolution. I also flew 10+ drone operations to capture photos and video for camp marketing.',
+  },
+]
+
 const projects: Project[] = [
   {
     title: 'stevenson.space',
     dateRange: 'Feb 2022 – May 2025',
-    techStack: 'Vue, Sass, TypeScript, Cloudflare R2 and Pages',
+    techStack: 'Vue, Sass, TypeScript, AWS Textract, Netlify',
     description:
       'Ran stevenson.space, an open‑source hub used weekly by 4k+ students for schedules, lunch, events, GPA tools, and a student music feature. The Vue/Sass/TypeScript platform scaled to 80k+ monthly views and stayed reliable for three years.',
     link: 'https://stevenson.space',
@@ -32,7 +75,7 @@ const projects: Project[] = [
     dateRange: 'Dec 2023 – Jul 2024',
     techStack: 'Event Ops, Sponsorships, Outreach, Nuxt',
     description:
-      'I led Windy City Hacks, a 100‑student high‑school hackathon in Chicagoland, and handled everything from sponsorships to day‑of logistics. We raised $4k+ to fund meals, venue costs, and prizes while building a cross‑school community.',
+      'I led Windy City Hacks, a 24-hour Chicago hackathon for 70 peers, and handled everything from sponsorships to day‑of logistics. We raised $4k+ to fund meals, venue costs, and prizes while building a cross‑school community.',
     link: 'https://windycityhacks.com',
   },
   {
@@ -44,7 +87,8 @@ const projects: Project[] = [
   },
 ]
 
-export default function ProjectsSection() {
+export default function ProjectsSection({ variant = 'projects' }: { variant?: 'projects' | 'experience' }) {
+  const entries = variant === 'experience' ? experience : projects
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -52,11 +96,11 @@ export default function ProjectsSection() {
       transition={{ delay: 0.2, duration: 0.6 }}
       className="glass-card rounded-2xl p-8 md:p-10 lg:p-12 mb-12 md:mb-16"
     >
-      <h2 className="text-xl font-display font-bold mb-8 text-primary">projects / experience</h2>
+      <h2 className="text-xl font-display font-bold mb-8 text-primary">{variant === 'experience' ? 'experience' : 'projects'}</h2>
       <div className="relative">
         <div className="absolute left-4 top-2 bottom-2 w-px bg-muted/40" />
         <div className="space-y-8">
-          {projects.map((project, index) => (
+          {entries.map((project, index) => (
             <motion.div
               key={`${project.title}-${index}`}
               initial={{ opacity: 0, y: 16 }}
@@ -88,6 +132,9 @@ export default function ProjectsSection() {
                       <h3 className="text-lg md:text-xl font-display font-semibold text-primary">
                         {project.title}
                       </h3>
+                    )}
+                    {project.role && (
+                      <p className="text-sm font-mono text-film-amber">{project.role}</p>
                     )}
                     <p className="text-xs md:text-sm font-mono text-muted">
                       {project.dateRange}
